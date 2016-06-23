@@ -208,6 +208,19 @@ section.success a.active {
     margin: 0 0 15px;
 }
 
+#portfolio .portfolio-item ul {
+    list-style-type: none;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#portfolio .portfolio-item ul li{
+    margin-bottom: 5px;
+    width: 32px;
+    height: 32px;
+}
+
 #portfolio .portfolio-item .portfolio-link {
     display: block;
     position: relative;
