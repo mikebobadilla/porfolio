@@ -27,6 +27,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://unpkg.com/vue@2.0.3/dist/vue.js"></script>
+    <!-- // <script src="js/layout.js"></script> -->
+
 </head>
 
 <body id="page-top" class="index">
@@ -92,20 +95,57 @@
                     <hr class="star-primary">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+            <div class="row" id="items">
+                <div class="col-sm-4 portfolio-item" v-for="item in items">
+                    <a :href="'#' + item.name  + 'Modal'" class="portfolio-link" data-toggle="modal">
                         <div class="caption">
                             <div class="caption-content">
                                 <i class="fa fa-search-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="img/portfolio/wildlife.png" class="img-responsive" alt="">
+                        <img :src="'img/portfolio/' + item.cover" class="img-responsive" alt="">
                         <ul>
-                            <li><img src="img/icons/Meteor.png" alt="Meteor Logo" ></li>
-                            <li><img src="img/icons/cordova.png" alt="Cordova Logo" ></li>
+                            <li v-for="framework in item.frameworks"><img :src="'img/icons/' + framework.cover" :alt="framework.info" ></li>
                         </ul>
                     </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio Modals -->
+        <div v-for="item in items" class="portfolio-modal modal fade" :id="item.name + 'Modal'" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>Project Title</h2>
+                                <hr class="star-primary">
+                                <img src="img/portfolio/wildlife.png" class="img-responsive img-centered" alt="">
+                                <p>{{item.description}}</p>
+                                <ul class="list-inline item-details">
+                                    <li>Technology Used:
+                                    <strong>
+                                        <a  v-for="framework in item.frameworks" target="blank" :href="framework.url"><img :src="'img/icons/' + framework.cover" :alt="framework.info"></a>
+                                    </strong>
+                                    </li>
+                                    <li>Date:
+                                    <strong>{{item.date}}</strong>
+                                    </li>
+                                    <li>Service:
+                                        <strong v-for="service in item.services">{{service}} </strong>
+                                    </li>
+                                </ul>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,7 +162,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2 text-center">
-                    <img src="http:///placehold.it/300x200" alt="" />
+                    <img src="img/my-image.png" width="300px" height="200px" alt="My Image" />
                 </div>
                 <div class="col-lg-4 visible-lg">
                     <p>I am fullstack web developer, meteor enthusiast, dad, coffe drinker, and bitcoin noob</p>
@@ -239,46 +279,7 @@
         </a>
     </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/wildlife.png" class="img-responsive img-centered" alt="">
-                            <p>React Technology - Wildlife Mobile App</p>
-                            <ul class="list-inline item-details">
-                                <li>Technology Used:
-                                <strong>
-                                    <a target="blank" href="http://www.meteor.com"><img src="img/icons/Meteor.png" alt="Meteor Icon"></a> 
-                                    <a target="blank" href="http://cordova.apache.org"><img src="img/icons/cordova.png" alt="Apache Cordova Icon"></a> 
-                                    <a target="blank" href="http://apple.com"><i class="fa fa-apple fa-3x" aria-hidden="true"></i></a> 
-                                    <a target="blank" href="http://android.com"><i class="fa fa-android fa-3x"></i></a>
-                                </strong>
-                                </li>
-                                <li>Date:
-                                <strong>June 2016</strong>
-                                </li>
-                                <li>Service:
-                                    <strong>Meteor Development</strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -297,6 +298,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
+    <script src="js/layout.js"></script>
 </body>
 
 </html>
